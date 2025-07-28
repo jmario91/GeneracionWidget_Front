@@ -11,14 +11,31 @@
       <div class="col-md-4">
         <label for="nombre" class="form-label">Nombre</label>
         <input id="nombre" type="text" class="form-control" formControlName="nombre">
+        <div *ngIf="formulario.get('nombre')?.touched && formulario.get('nombre')?.invalid" class="text-danger">
+          <small *ngIf="formulario.get('nombre')?.errors?.['required']">El nombre es obligatorio</small>
+          <small *ngIf="formulario.get('nombre')?.errors?.['minlength']">Debe tener al menos 2 caracteres</small>
+          <small *ngIf="formulario.get('nombre')?.errors?.['maxlength']">No puede exceder 50 caracteres</small>
+        </div>
       </div>
       <div class="col-md-4">
         <label for="apellidoPaterno" class="form-label">Apellido Paterno</label>
         <input id="apellidoPaterno" type="text" class="form-control" formControlName="apellidoPaterno">
+        <div class="text-danger" *ngIf="formulario.get('apellidoPaterno')?.errors?.['required']">
+          El apellido paterno es obligatorio.
+        </div>
+        <div class="text-danger" *ngIf="formulario.get('apellidoPaterno')?.errors?.['backend']">
+          {{ formulario.get('apellidoPaterno')?.errors?.['backend'] }}
+        </div>
       </div>
       <div class="col-md-4">
         <label for="apellidoMaterno" class="form-label">Apellido Materno</label>
         <input id="apellidoMaterno" type="text" class="form-control" formControlName="apellidoMaterno">
+        <div class="text-danger" *ngIf="formulario.get('apellidoMaterno')?.errors?.['required']">
+          El apellido materno es obligatorio.
+        </div>
+        <div class="text-danger" *ngIf="formulario.get('apellidoMaterno')?.errors?.['backend']">
+          {{ formulario.get('apellidoMaterno')?.errors?.['backend'] }}
+        </div>
       </div>
 
       <!-- Estatus, Fecha, Sexo, Edad -->
@@ -37,11 +54,23 @@
         <select id="sexo" class="form-select" formControlName="sexo">
           <option value="H">Hombre</option>
           <option value="M">Mujer</option>
+          <div class="text-danger" *ngIf="formulario.get('sexo')?.errors?.['required']">
+            El tipo de sexo es obligatorio.
+          </div>
+          <div class="text-danger" *ngIf="formulario.get('sexo')?.errors?.['backend']">
+            {{ formulario.get('sexo')?.errors?.['backend'] }}
+          </div>
         </select>
       </div>
       <div class="col-md-3">
         <label for="edad" class="form-label">Edad</label>
         <input id="edad" type="number" class="form-control" formControlName="edad">
+        <div class="text-danger" *ngIf="formulario.get('edad')?.errors?.['required']">
+          El campo edad es obligatorio.
+        </div>
+        <div class="text-danger" *ngIf="formulario.get('edad')?.errors?.['backend']">
+          {{ formulario.get('edad')?.errors?.['backend'] }}
+        </div>
       </div>
 
       <!-- Dirección -->
@@ -65,10 +94,20 @@
         <label for="codigoPostal" class="form-label">Código Postal</label>
         <input id="codigoPostal" type="text" class="form-control" formControlName="codigoPostal">
       </div>
-      <div class="col-md-6">
-        <label for="email" class="form-label">Email</label>
-        <input id="email" type="email" class="form-control" formControlName="email">
+      <div class="col-md-6"> 
+       <label>Email</label>
+  <input formControlName="email" class="form-control" />
+  <div class="text-danger" *ngIf="formulario.get('email')?.errors?.['required']">
+    El email es obligatorio.
+  </div>
+  <div class="text-danger" *ngIf="formulario.get('email')?.errors?.['email']">
+    El formato del email es inválido.
+  </div>
+  <div class="text-danger" *ngIf="formulario.get('email')?.errors?.['backend']">
+    {{ formulario.get('email')?.errors?.['backend'] }}
+  </div>    
       </div>
+
 
       <!-- Información académica y ocupacional -->
       <div class="col-12 modal-section">
@@ -152,15 +191,20 @@
       <!-- Footer -->
       <div class="modal-footer justify-content-end gap-2">
         <button class="btn btn-outline-secondary" type="button" (click)="cancelar()">Cancelar</button>
-        <button class="btn btn-success" type="submit" [disabled]="formulario.invalid || cargando">
-          <ng-container *ngIf="!cargando; else loading">
-            Guardar
-          </ng-container>
-          <ng-template #loading>
-            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-            Guardando...
-          </ng-template>
-        </button>
+
+     
+ 
+       <button 
+  class="btn btn-primary"
+  type="submit"
+  [disabled]="formulario.invalid || cargando">
+  <ng-container *ngIf="!cargando; else cargandoTpl">Guardar</ng-container>
+</button>
+
+<ng-template #cargandoTpl>
+  <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+  Guardando...
+</ng-template>
       </div>
     </form>
   </div>

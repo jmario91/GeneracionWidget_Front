@@ -69,7 +69,7 @@ export class UsuariosComponent implements OnInit {
         this.dataSource.data = res.data;
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
-        console.log('Usuarios cargados:', this.dataSource.data);
+     
       },
       error: (err) => console.error('Error al cargar usuarios:', err)
     });

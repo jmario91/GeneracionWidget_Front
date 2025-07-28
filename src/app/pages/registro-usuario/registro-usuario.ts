@@ -21,11 +21,15 @@ export class RegistroUsuarioComponent implements OnInit {
   hobbiesDisponibles = ['Leer', 'Deportes', 'Música', 'Viajar', 'Cine'];
   
 
+
 ocupaciones = ['Estudiante', 'Empleado', 'Independiente', 'Desempleado', 'Jubilado', 'Otro'];
 estadoCiviles = ['Soltero', 'Casado', 'Divorciado', 'Viudo', 'Unión libre'];
 nivelesEducativos = ['Primaria', 'Secundaria', 'Preparatoria', 'Licenciatura', 'Maestría', 'Doctorado'];
 idiomas = ['Español', 'Inglés', 'Francés', 'Alemán', 'Italiano', 'Portugués', 'Otro'];
 
+ 
+ 
+ 
 
 cargando = false;
   constructor(
@@ -35,28 +39,31 @@ cargando = false;
   ) {
   
     this.formulario = this.fb.group({
-  nombre: ['', Validators.required],
-  apellidoPaterno: ['', Validators.required],
-  apellidoMaterno: [''],
-  estatus: ['Alta', Validators.required],
-  fechaNacimiento: ['', Validators.required],
+  nombre: ['',  [
+    Validators.required,
+    Validators.minLength(2),
+    Validators.maxLength(50)
+  ]],
+  apellidoPaterno: ['', [Validators.required,   Validators.maxLength(50)]],
+  apellidoMaterno: ['', [Validators.required,   Validators.maxLength(50)]],
+  estatus: ['Alta'],
+  fechaNacimiento: [''],
   sexo: ['H', Validators.required],
   edad: [null, [Validators.required, Validators.min(0), Validators.max(120)]],
-  entidad: ['', Validators.required],
-  municipio: ['', Validators.required],
-  colonia: ['', Validators.required],
-  codigoPostal: [null, [Validators.required, Validators.pattern(/^\d{5}$/)]],
+  entidad: [''],
+  municipio: [''],
+  colonia: [''],
+  codigoPostal: [null],
   talla: [null, [Validators.required, Validators.min(0.5), Validators.max(3)]],
   peso: [null, [Validators.required, Validators.min(1), Validators.max(500)]],
   email: ['', [Validators.required, Validators.email]],
-  aceptaTerminos: [false, Validators.requiredTrue],
-
+  
+  aceptaTerminos: [false],
   ocupacion: [''],
   estadoCivil: [''],
   nivelEducativo: [''],
   idioma: [''] , 
   hobbies: [<string[]>[]],
-     
       notasAdicionales: ['']
 });
 
@@ -74,7 +81,6 @@ cargando = false;
     }
   }
 
- 
   guardar(): void {
   if (this.formulario.invalid) {
     this.formulario.markAllAsTouched();
@@ -83,11 +89,16 @@ cargando = false;
 
   this.cargando = true;
 
+  // Clonamos y transformamos el objeto
   const datosUsuario: Usuario = { ...this.formulario.value };
   datosUsuario.fechaNacimiento = this.formatearFechaISO(datosUsuario.fechaNacimiento);
+  datosUsuario.edad = new Date().getFullYear() - new Date(datosUsuario.fechaNacimiento).getFullYear();
+
+  // Validación de enums antes de enviar
   const enums = {
     sexo: ['H', 'M'],
-    estatus: ['Alta', 'Baja']
+    estatus: ['Alta', 'Baja'],
+    idioma: ['Español', 'Inglés', 'Francés', 'Alemán', 'Italiano', 'Portugués', 'Otro']
   };
 
   if (!enums.sexo.includes(datosUsuario.sexo)) {
@@ -96,24 +107,52 @@ cargando = false;
   if (!enums.estatus.includes(datosUsuario.estatus)) {
     console.warn('⚠️ Estatus no válido:', datosUsuario.estatus);
   }
- 
-  const callback = this.usuario
-    ? this.usuariosService.actualizarUsuario(this.usuario._id!, datosUsuario)
-    : this.usuariosService.crearUsuario(datosUsuario);
+  if (datosUsuario.idioma && !enums.idioma.includes(datosUsuario.idioma)) {
+    console.warn('⚠️ Idioma no válido:', datosUsuario.idioma);
+  }
 
-  // Ejecutamos la petición
-  callback.subscribe({
-    next: (res) => {
-      this.cargando = false;
-      this.activeModal.close(res);
-    },
-    error: (err) => {
-      this.cargando = false;
-      console.error('Error al guardar usuario:', err);
-      alert('Ocurrió un error al guardar el usuario');
+  // Limpieza de campos vacíos
+  const datosLimpios = { ...datosUsuario } as Record<string, any>;
+  Object.keys(datosLimpios).forEach((key) => {
+    if (datosLimpios[key] === '' || datosLimpios[key] == null) {
+      delete datosLimpios[key];
     }
   });
+
+  // Crear o actualizar
+  const callback = this.usuario
+    ? this.usuariosService.actualizarUsuario(this.usuario._id!, datosLimpios as Usuario)
+    : this.usuariosService.crearUsuario(datosLimpios as Usuario);
+
+ 
+callback.subscribe({
+  next: (res) => {
+    this.cargando = false;
+    this.activeModal.close(res);
+  },
+  error: (err) => {
+    this.cargando = false;
+    console.error('Error del backend:', err);
+
+    if (err.status === 400 && err.error?.errores) {
+      const erroresBackend = err.error.errores;
+
+      // Recorre los errores del backend y asigna al formulario
+      for (const campo in erroresBackend) {
+        const control = this.formulario.get(campo);
+        if (control) {
+          control.setErrors({ backend: erroresBackend[campo] });
+        }
+      }
+    } else {
+      alert('Ocurrió un error inesperado');
+    }
   }
+});
+}
+
+
+
   formatearFechaISO(fecha: string | Date): string {
   const d = new Date(fecha);
   const yyyy = d.getFullYear();
