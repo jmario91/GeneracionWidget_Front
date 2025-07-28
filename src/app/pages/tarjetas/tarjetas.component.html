@@ -1,0 +1,24 @@
+<div class="container-fluid mt-4">
+    <!-- Tarjetas de estadísticas -->
+    <div class="row">
+      <div class="col-xl-3 col-md-6 mb-4" *ngFor="let tarjeta of tarjetas">
+        <app-tarjeta-estadisticas
+          class="w-100"
+          [titulo]="tarjeta.titulo"
+          [valor]="tarjeta.valor"
+          [icono]="tarjeta.icono"
+          [tipoIcono]="tarjeta.tipoIcono"
+          [claseFondoIcono]="tarjeta.claseFondoIcono"
+          [subtitulo]="tarjeta.subtitulo"
+          [cambioSubtitulo]="tarjeta.cambioSubtitulo"
+          [direccionCambioSubtitulo]="tarjeta.direccionCambioSubtitulo"
+          [colorCambioSubtitulo]="tarjeta.colorCambioSubtitulo"
+          [estilo]="estiloGeneral"
+          [claseTarjeta]="tarjeta.claseTarjeta"
+        ></app-tarjeta-estadisticas>
+      </div>
+    </div>
+  
+   
+  </div>
+  

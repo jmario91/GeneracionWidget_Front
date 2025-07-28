@@ -1,0 +1,29 @@
+<div class="card" [ngClass]="clasesTarjeta">
+  <div class="card-body">
+    <div class="row align-items-center">
+      <div class="col">
+        <h5 class="card-title text-uppercase text-muted mb-0">{{ titulo }}</h5>
+        <span class="h2 font-weight-bold mb-0">{{ valor }}</span>
+      </div>
+      <div class="col-auto">
+        <div class="icon-shape text-white rounded-circle shadow" [ngClass]="claseFondoIcono">
+          <ng-container [ngSwitch]="tipoIcono">
+            
+                <span *ngSwitchCase="'material'" class="material-icons">{{ icono }}</span>
+                <span *ngSwitchCase="'outlined'" class="material-symbols-outlined">{{ icono }}</span>
+             
+          
+            </ng-container>
+        </div>
+      </div>
+    </div>
+
+    <p class="mt-3 mb-0 text-muted text-sm" *ngIf="subtitulo">
+      <span [ngClass]="colorCambioSubtitulo + ' mr-2'" *ngIf="cambioSubtitulo">
+        <i class="fa" [ngClass]="direccionCambioSubtitulo === 'up' ? 'fa-arrow-up' : 'fa-arrow-down'"></i>
+        {{ cambioSubtitulo }}
+      </span>
+      <span class="text-nowrap">{{ subtitulo }}</span>
+    </p>
+  </div>
+</div>

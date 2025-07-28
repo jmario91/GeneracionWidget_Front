@@ -1,0 +1,67 @@
+<header class="encabezado-argon d-flex align-items-center justify-content-between flex-wrap px-4 py-3">
+   
+  <div class="d-flex align-items-center gap-3">
+    <button class="btn btn-light d-lg-none p-1" (click)="alternarSidebar()">
+      <span class="material-icons text-white">menu</span>
+    </button>
+
+    <div class="nombre-aplicacion d-flex align-items-center gap-2 fw-semibold text-white">
+      <img [src]="logoUrl" alt="Logo" width="32" height="32" />
+      <span class="fs-5">{{ nombreAplicacion }}</span>
+    </div>
+  </div>
+
+  
+  <div class="buscador-argon d-none d-md-block flex-grow-1 px-4">
+    <div class="input-group position-relative">
+      <span class="input-group-text bg-transparent border-0 position-absolute start-0 ps-3">
+        <span class="material-icons text-white">search</span>
+      </span>
+      <input
+        type="text"
+        class="form-control ps-5 rounded-pill bg-white bg-opacity-10 border-0 text-white"
+        placeholder="Buscar..." />
+    </div>
+  </div>
+
+ 
+  <div class="acciones-header d-flex align-items-center gap-3">
+  
+    <button class="btn btn-light d-md-none p-1" (click)="mostrarModalBusqueda = true">
+      <span class="material-icons text-white">search</span>
+    </button>
+
+  
+    <span class="material-icons text-white">notifications</span>
+
+   
+    <div class="dropdown position-relative" *ngIf="usuario">
+      <div class="d-flex align-items-center cursor-pointer" (click)="mostrarMenuUsuario = !mostrarMenuUsuario">
+        <img [src]="usuario.imagenUrl" alt="Foto perfil" class="avatar-usuario me-2" />
+        <div class="d-none d-sm-block text-white">
+          <div class="nombre-usuario fw-semibold">{{ usuario.nombre }}</div>
+          <div class="rol-usuario text-white-50 small">{{ usuario.rol }}</div>
+        </div>
+      </div>
+
+      <div class="dropdown-menu dropdown-menu-end mt-2 shadow-sm" *ngIf="mostrarMenuUsuario">
+        <a class="dropdown-item" href="#">Perfil</a>
+        <a class="dropdown-item" href="#">Configuración</a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item text-danger" href="#">Cerrar sesión</a>
+      </div>
+    </div>
+
+    
+    <button class="btn btn-sm btn-outline-light rounded-pill px-3" (click)="cambiarIdioma()">
+      {{ idiomaActual }}
+    </button>
+
+    
+    <button class="btn btn-sm btn-outline-light rounded-circle" (click)="cambiarTema()">
+      <span class="material-icons">
+        {{ modoOscuro ? 'dark_mode' : 'light_mode' }}
+      </span>
+    </button>
+  </div>
+</header>

@@ -1,0 +1,17 @@
+<div class="container-fluid mt-4">
+   <div class="row">
+    <ng-container *ngFor="let grafica of graficas">
+      <div class="col-md-6 col-xl-4 mb-4">
+        <app-grafica
+          [titulo]="grafica.titulo"
+          [subtitulo]="grafica.subtitulo"
+          [etiquetas]="grafica.etiquetas"
+          [conjuntosDatos]="grafica.conjuntosDatos"
+          [tipo]="grafica.tipo"
+          [estilo]="grafica.estilo || estiloGeneral"
+          [claseTarjeta]="'mb-4'"
+        ></app-grafica>
+      </div>
+    </ng-container>
+  </div> 
+</div>

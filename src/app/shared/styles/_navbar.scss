@@ -1,0 +1,68 @@
+.encabezado-argon {
+  background: linear-gradient(90deg, #f5365c 0%, #f56036 100%);
+  color: #fff;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  z-index: 1050;
+
+  .nombre-aplicacion {
+    font-weight: 600;
+    font-size: 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    img {
+      height: 32px;
+    }
+  }
+
+  .buscador-argon {
+    max-width: 400px;
+    flex-grow: 1;
+    margin: 1rem auto;
+
+    .form-control {
+      border-radius: 2rem;
+      padding-left: 2.5rem;
+      background-color: rgba(255, 255, 255, 0.15);
+      color: #fff;
+      border: none;
+    }
+
+    .input-group-text {
+      background: transparent;
+      border: none;
+      color: #fff;
+      position: absolute;
+      left: 0.75rem;
+    }
+  }
+
+  .acciones-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    .material-icons {
+      color: #fff;
+    }
+
+    .btn {
+      color: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .avatar-usuario {
+      border-radius: 50%;
+      height: 36px;
+      width: 36px;
+      object-fit: cover;
+      border: 2px solid #fff;
+    }
+  }
+}

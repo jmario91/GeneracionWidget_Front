@@ -1,0 +1,167 @@
+<div class="modal-header">
+  <h5 class="modal-title">Formulario de Registro de Usuario</h5>
+  <button type="button" class="btn-close" (click)="cancelar()"></button>
+</div>
+
+<div class="modal-body modal-body-scroll">
+  <div class="container-fluid p-4 bg-white rounded shadow">
+    <form [formGroup]="formulario" (ngSubmit)="guardar()" class="row g-3">
+
+      <!-- Nombre completo -->
+      <div class="col-md-4">
+        <label for="nombre" class="form-label">Nombre</label>
+        <input id="nombre" type="text" class="form-control" formControlName="nombre">
+      </div>
+      <div class="col-md-4">
+        <label for="apellidoPaterno" class="form-label">Apellido Paterno</label>
+        <input id="apellidoPaterno" type="text" class="form-control" formControlName="apellidoPaterno">
+      </div>
+      <div class="col-md-4">
+        <label for="apellidoMaterno" class="form-label">Apellido Materno</label>
+        <input id="apellidoMaterno" type="text" class="form-control" formControlName="apellidoMaterno">
+      </div>
+
+      <!-- Estatus, Fecha, Sexo, Edad -->
+      <div class="col-md-3">
+        <label for="estatus" class="form-label">Estatus</label>
+        <select id="estatus" class="form-select" formControlName="estatus">
+          <option *ngFor="let status of estatuses" [value]="status">{{ status }}</option>
+        </select>
+      </div>
+      <div class="col-md-3">
+        <label for="fechaNacimiento" class="form-label">Fecha de Nacimiento</label>
+        <input id="fechaNacimiento" type="date" class="form-control" formControlName="fechaNacimiento">
+      </div>
+      <div class="col-md-3">
+        <label for="sexo" class="form-label">Sexo</label>
+        <select id="sexo" class="form-select" formControlName="sexo">
+          <option value="H">Hombre</option>
+          <option value="M">Mujer</option>
+        </select>
+      </div>
+      <div class="col-md-3">
+        <label for="edad" class="form-label">Edad</label>
+        <input id="edad" type="number" class="form-control" formControlName="edad">
+      </div>
+
+      <!-- Dirección -->
+      <div class="col-md-4">
+        <label for="entidad" class="form-label">Entidad</label>
+        <select id="entidad" class="form-select" formControlName="entidad">
+          <option *ngFor="let e of entidades" [value]="e">{{ e }}</option>
+        </select>
+      </div>
+      <div class="col-md-4">
+        <label for="municipio" class="form-label">Municipio</label>
+        <input id="municipio" type="text" class="form-control" formControlName="municipio">
+      </div>
+      <div class="col-md-4">
+        <label for="colonia" class="form-label">Colonia</label>
+        <input id="colonia" type="text" class="form-control" formControlName="colonia">
+      </div>
+
+      <!-- Contacto -->
+      <div class="col-md-6">
+        <label for="codigoPostal" class="form-label">Código Postal</label>
+        <input id="codigoPostal" type="text" class="form-control" formControlName="codigoPostal">
+      </div>
+      <div class="col-md-6">
+        <label for="email" class="form-label">Email</label>
+        <input id="email" type="email" class="form-control" formControlName="email">
+      </div>
+
+      <!-- Información académica y ocupacional -->
+      <div class="col-12 modal-section">
+        <h5 class="text-secondary">Información académica y ocupacional</h5>
+
+        <div class="row g-3">
+          <div class="col-md-6">
+            <label for="ocupacion" class="form-label">Ocupación</label>
+            <input id="ocupacion" type="text" class="form-control" formControlName="ocupacion"
+              placeholder="Ej. Estudiante, Ingeniero, etc.">
+          </div>
+          <div class="col-md-6">
+            <label for="estadoCivil" class="form-label">Estado Civil</label>
+            <select id="estadoCivil" class="form-select" formControlName="estadoCivil">
+              <option value="">Seleccione</option>
+              <option value="Soltero">Soltero</option>
+              <option value="Casado">Casado</option>
+              <option value="Divorciado">Divorciado</option>
+              <option value="Viudo">Viudo</option>
+            </select>
+          </div>
+
+          <!-- Hobbies -->
+          <div class="col-12">
+            <label class="form-label d-block">Hobbies</label>
+            <div class="form-check form-check-inline" *ngFor="let hobbie of hobbiesDisponibles">
+              <input class="form-check-input" type="checkbox" [id]="'hobbie_' + hobbie" [value]="hobbie"
+                (change)="toggleHobbie(hobbie, $event)" [checked]="formulario.value.hobbies?.includes(hobbie)">
+              <label class="form-check-label" [for]="'hobbie_' + hobbie">{{ hobbie }}</label>
+            </div>
+          </div>
+
+          <!-- Nivel educativo -->
+          <div class="col-12 mt-3">
+            <label class="form-label d-block">Nivel Educativo</label>
+            <div class="form-check form-check-inline" *ngFor="let nivel of nivelesEducativos">
+              <input class="form-check-input" type="radio" [id]="'nivel_' + nivel" name="nivelEducativo" [value]="nivel"
+                formControlName="nivelEducativo">
+              <label class="form-check-label" [for]="'nivel_' + nivel">{{ nivel }}</label>
+            </div>
+          </div>
+
+          <!-- Idioma -->
+          <div class="col-md-6">
+            <label for="idioma" class="form-label">Idioma principal</label>
+            <input id="idioma" type="text" class="form-control" formControlName="idioma"
+              placeholder="Ej. Español, Inglés">
+          </div>
+
+          <!-- Notas -->
+          <div class="col-12 mt-3">
+            <label for="notasAdicionales" class="form-label">Notas Adicionales</label>
+            <textarea id="notasAdicionales" class="form-control" rows="3" formControlName="notasAdicionales"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <!-- Otros datos -->
+      <div class="col-12 modal-section">
+        <h5 class="text-secondary">Otros datos del usuario</h5>
+        <div class="row g-3">
+          <div class="col-md-6">
+            <label for="talla" class="form-label">Talla</label>
+            <input id="talla" type="number" step="0.01" class="form-control" formControlName="talla">
+          </div>
+          <div class="col-md-6">
+            <label for="peso" class="form-label">Peso</label>
+            <input id="peso" type="number" step="0.01" class="form-control" formControlName="peso">
+          </div>
+
+          <div class="col-12">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="aceptaTerminos" formControlName="aceptaTerminos">
+              <label class="form-check-label" for="aceptaTerminos">
+                Acepto términos y condiciones
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Footer -->
+      <div class="modal-footer justify-content-end gap-2">
+        <button class="btn btn-outline-secondary" type="button" (click)="cancelar()">Cancelar</button>
+        <button class="btn btn-success" type="submit" [disabled]="formulario.invalid || cargando">
+          <ng-container *ngIf="!cargando; else loading">
+            Guardar
+          </ng-container>
+          <ng-template #loading>
+            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            Guardando...
+          </ng-template>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

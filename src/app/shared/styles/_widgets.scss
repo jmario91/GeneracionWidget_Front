@@ -1,0 +1,159 @@
+.widget {
+  background: white;
+  border-radius: 1rem;
+  padding: 1.25rem;
+  border: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+  }
+
+  .card-title {
+    font-size: 0.8rem;
+    color: #6b7280;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+  }
+
+  .h2 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #1f2937;
+  }
+
+  .text-sm {
+    color: #6b7280;
+  }
+}
+.custom-checkbox .form-check-input {
+  width: 1.15rem;
+  height: 1.15rem;
+  border-radius: 0.375rem;
+  border: 2px solid #cbd5e0; // gris claro
+  transition: all 0.2s ease;
+}
+
+.custom-checkbox .form-check-input:checked {
+  background-color: #6366f1; // indigo-500
+  border-color: #6366f1;
+  box-shadow: 0 0 0 0.2rem rgba(99, 102, 241, 0.25);
+}
+
+.custom-checkbox .form-check-input:focus {
+  box-shadow: 0 0 0 0.2rem rgba(99, 102, 241, 0.4);
+}
+
+.custom-checkbox .form-check-label {
+  font-weight: 500;
+  color: #2d3748; // gris oscuro
+}
+
+.custom-checkbox .form-check-input:disabled {
+  background-color: #e2e8f0;
+  border-color:
+   #e2e8f0;
+}
+ 
+input.form-control-sm {
+  max-width: 90%;
+  border-radius: 0.5rem;
+  border-color: #cbd5e0;
+}
+
+/* Estilos visuales para encabezados según el estilo del widget */
+.encabezado-default {
+  background: linear-gradient(90deg, #ff7a18 0%, #ff6600 100%);
+  color: #fff;
+}
+
+.encabezado-outline {
+  background-color: transparent;
+  border-bottom: 2px dashed #6c757d;
+  color: #6c757d;
+}
+
+.encabezado-minimal {
+  background-color: #f3f4f6;
+  color: #1f2937;
+}
+
+.encabezado-filled {
+  background-color: #10b981;
+  color: #fff;
+}
+
+.encabezado-glass {
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(6px);
+  color: #111827;
+}
+
+.encabezado-minimal-dark {
+  background-color: #374151;
+  color: #f9fafb;
+}
+
+.encabezado-tech {
+  background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+  color: #ffffff;
+}
+
+.encabezado-ocean {
+  background: linear-gradient(90deg, #007cf0 0%, #00dfd8 100%);
+  color: white;
+}
+.widget-scroll-wrapper {
+  max-height: 300px;
+  overflow-y: auto;
+  border-radius: 0.5rem;
+  border: 1px solid #e5e7eb;
+}
+
+.widget-scroll-wrapper table {
+  min-width: 100%;
+  border-collapse: collapse;
+}
+
+.widget-scroll-wrapper thead th {
+  position: sticky;
+  top: 0;
+  background-color: #f9fafb;
+  z-index: 2;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.05);
+}
+
+.table tbody tr {
+  transition: background-color 0.2s ease;
+}
+
+.table tbody tr.table-active {
+  background-color: #eef2ff;
+}
+
+
+.form-control-sm {
+  font-size: 0.85rem;
+  padding:0.3rem 0.5rem;
+  border-radius: 0.4rem;
+}
+.form-check {
+  font-size: 0.95rem;
+}
+
+.form-check-input {
+  width: 1.1rem;
+  height: 1.1rem;
+}
+.custom-checkbox .form-check-label {
+  font-size: 0.95rem;
+}
+
+input.form-control-sm {
+  font-size: 0.85rem;
+  max-width: 100%;
+}
+
+

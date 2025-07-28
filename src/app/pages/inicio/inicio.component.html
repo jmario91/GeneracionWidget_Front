@@ -1,0 +1,28 @@
+<div class="container-fluid mt-4">
+
+  <!-- Contacto -->
+  <div class="row">
+    @for (contacto of contactos; track contacto) {
+      <div class="col-xl-4 col-md-6 mb-4">
+        <app-tarjeta-contacto
+          [datos]="contacto"
+          (verPerfil)="abrirPerfil()"
+          (contactar)="enviarMensaje()"
+          (contactoSeleccionado)="mostrarContactoRelacionado($event)">
+        </app-tarjeta-contacto>
+      </div>
+    }
+
+  </div>
+  <div class="row">
+    <app-checklist-documentos
+      [titulo]="'Check List Documentos Pago de Servicios'"
+      [documentos]="documentos"
+      [estilo]="estiloGeneral"
+      [claseTarjeta]="'mt-4'"
+      [limiteActivarScroll]="6"
+    ></app-checklist-documentos>
+
+  </div>
+
+</div>

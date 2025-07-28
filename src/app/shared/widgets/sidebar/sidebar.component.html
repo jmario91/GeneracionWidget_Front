@@ -1,0 +1,32 @@
+<!-- Overlay para móviles -->
+<div class="sidebar-overlay" *ngIf="abierto" (click)="toggleMenu.emit()"></div>
+
+<!-- Sidebar principal -->
+<div class="_sidebar" [ngClass]="{ 'abierto': abierto }">
+  <div class="sidebar-header px-3 py-3 border-bottom">
+    <div class="d-flex justify-content-between align-items-center">
+      <span>{{ nombreAplicacion }}</span>
+      <button class="btn btn-sm d-lg-none" (click)="toggleMenu.emit()">
+        <span class="material-icons">close</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="sidebar-body px-2">
+    <ng-container *ngFor="let seccion of agruparPorSeccion() | keyvalue">
+      <h6 class="text-uppercase px-3 mt-3">{{ seccion.key }}</h6>
+      <ul class="nav flex-column">
+        <li *ngFor="let item of seccion.value" class="nav-item">
+          <a [routerLink]="item.ruta" class="nav-link d-flex align-items-center px-3 py-2">
+            <span class="material-icons me-2">{{ item.icono }}</span>
+            {{ item.texto }}
+          </a>
+        </li>
+      </ul>
+    </ng-container>
+  </div>
+
+  <div class="sidebar-footer text-center small text-muted py-3 border-top">
+    © {{ anioActual }} {{ nombreAplicacion }}
+  </div>
+</div>

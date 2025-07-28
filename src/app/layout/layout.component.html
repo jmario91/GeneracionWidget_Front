@@ -1,0 +1,29 @@
+ 
+<div class="diseño-principal d-flex">
+ 
+  <app-sidebar
+  [enlaces]="enlacesLateral"
+  [nombreAplicacion]="encabezadoConfig.nombreAplicacion"
+  [abierto]="mostrarMenuLateral"
+  (toggleMenu)="alternarMenu()">
+</app-sidebar>
+ 
+
+ 
+  <div class="flex-grow-1 d-flex flex-column min-vh-100">
+  
+    <app-encabezado
+      [nombreAplicacion]="encabezadoConfig.nombreAplicacion"
+      [logoUrl]="encabezadoConfig.logoUrl"
+      [usuario]="encabezadoConfig.usuario"
+      (toggleMenu)="alternarMenu()"
+      (temaCambiado)="onTemaCambiado($event)"
+      (idiomaCambiado)="onIdiomaCambiado($event)"
+    ></app-encabezado>
+
+     <main class="flex-grow-1 p-4 fondo-contenido">
+      <router-outlet></router-outlet>
+    </main>  
+    
+  </div>
+</div>

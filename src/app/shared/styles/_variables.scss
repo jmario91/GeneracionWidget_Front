@@ -1,0 +1,73 @@
+// 👉 Variables SCSS
+$espaciado-pequeno: 0.5rem;
+$espaciado-mediano: 0.75rem;
+$espaciado-grande: 1.25rem;
+$radio: 1rem;
+
+$color-primario: #3b82f6;
+$color-primario-light: #e0f2fe;
+$color-secundario: #0284c7;
+$color-texto: #1f2937;
+
+ 
+:root {
+  --color-fondo: #f8f9fc;
+  --color-texto: #1f2937;
+  --color-navbar-bg: #0284c7;
+  --color-sidebar-bg: #ffffff;
+  --color-link: #1f2937;
+  --color-link-hover: #3b82f6;
+}
+
+ 
+.dark-mode {
+  --color-fondo: #363535;
+  --color-texto: #f1f1f1;
+  --color-navbar-bg: #363535;
+  --color-sidebar-bg: #363535;
+  --color-link: #f1f1f1;
+  --color-link-hover: #90caf9;
+}
+
+//   Variantes visuales para widgets
+.variant-Predeterminado {
+  background: #ffffff;
+  color: #1f2937;
+}
+
+.variant-Oceano {
+  background: linear-gradient(90deg, #007cf0 0%, #00dfd8 100%);
+  color: #ffffff;
+}
+
+.variant-Tech {
+  background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+  color: #ffffff;
+}
+
+.variant-Glass {
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(6px);
+  color: #111827;
+}
+
+.variant-Minimal {
+  background-color: #f3f4f6;
+  color: #1f2937;
+}
+
+.variant-MinimalDark {
+  background-color: #374151;
+  color: #f9fafb;
+}
+
+.variant-Filled {
+  background-color: #10b981;
+  color: #ffffff;
+}
+
+.variant-Outline {
+  background-color: transparent;
+  border: 2px dashed #6b7280;
+  color: #6b7280;
+}

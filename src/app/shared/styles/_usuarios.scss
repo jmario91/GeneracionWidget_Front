@@ -1,0 +1,112 @@
+.table-container {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 1rem 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  margin-top: 1rem;
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 12px;
+}
+
+mat-header-row,
+mat-row {
+  border-bottom: none !important;
+}
+
+mat-header-cell {
+  font-weight: 600;
+  color: #4a4a4a;
+  background-color: #f9fafb;
+  padding: 14px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+mat-cell {
+  padding: 14px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  transition: transform 0.2s;
+}
+
+mat-row:hover mat-cell {
+  background-color: #f5f8ff;
+  transform: scale(1.01);
+}
+
+.avatar-placeholder {
+  width: 40px;
+  height: 40px;
+  background-color: #e0edff;
+  color: #1565c0;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.btn-editar {
+  background-color: #1976d2;
+  color: white;
+  border: none;
+  padding: 6px 16px;
+  border-radius: 6px;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: 0.2s;
+
+  &:hover {
+    background-color: #115293;
+    transform: scale(1.05);
+  }
+}
+
+.btn-eliminar {
+  background-color: #e53935;
+  color: white;
+  border: none;
+  padding: 6px 16px;
+  border-radius: 6px;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: 0.2s;
+
+  &:hover {
+    background-color: #b71c1c;
+    transform: scale(1.05);
+  }
+}
+
+.chip {
+  padding: 4px 10px;
+  border-radius: 16px;
+  font-size: 13px;
+  font-weight: 500;
+  display: inline-block;
+  color: white;
+
+  &.alta {
+    background-color: #4caf50;
+  }
+
+  &.baja {
+    background-color: #f44336;
+  }
+}
+
+.buscador {
+  width: 100%;
+  max-width: 360px;
+  margin-bottom: 1rem;
+}

@@ -1,0 +1,24 @@
+@use './variables' as vars;
+body {
+  font-family: 'Inter', 'Roboto', sans-serif;
+  background-color: var(--color-fondo);
+}
+
+.breadcrumb {
+  background-color: transparent;
+  padding: 0;
+  margin-bottom: 0;
+
+  .breadcrumb-item a {
+    color: vars.$color-primario;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  .breadcrumb-item.active {
+    color: #6b7280;
+  }
+}

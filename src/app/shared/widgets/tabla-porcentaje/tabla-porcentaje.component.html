@@ -1,0 +1,56 @@
+<div class="card" [ngClass]="clasesTarjeta">
+  <div class="card-body">
+    <h5 class="card-title text-uppercase text-muted mb-3">{{ titulo }}</h5>
+
+    <input
+      type="text"
+      class="form-control form-control-sm mb-3"
+      placeholder="Buscar..."
+      [(ngModel)]="textoBusqueda"
+      (input)="aplicarFiltro()"
+    />
+
+    <table class="table table-sm table-hover">
+      <thead>
+        <tr>
+          <th *ngFor="let col of columnas">{{ col.nombre }}</th>
+          <th *ngIf="tieneColumnaTendencia()">Tendencia</th>
+
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let registro of registrosFiltrados">
+          <td *ngFor="let col of columnas">
+            {{ registro[col.clave] }}
+          </td>
+          <td *ngIf="tieneColumnaTendencia()">
+            <i class="fa"
+               [ngClass]="{
+                 'fa-arrow-up text-success': registro.tendencia === 'up',
+                 'fa-arrow-down text-danger': registro.tendencia === 'down'
+               }"></i>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="d-flex justify-content-between align-items-center">
+      <button class="btn btn-sm btn-outline-secondary"
+              (click)="cambiarPagina(false)"
+              [disabled]="paginaActual === 1">
+        Anterior
+      </button>
+      <button class="btn btn-sm btn-outline-secondary"
+              (click)="cambiarPagina(true)"
+              [disabled]="paginaActual * elementosPorPagina >= registros.length">
+        Siguiente
+      </button>
+    </div>
+     
+    <button *ngIf="mostrarBoton"
+            class="btn btn-sm btn-outline-primary mt-3 w-100">
+      Ver más
+    </button>
+  </div>
+</div>
+

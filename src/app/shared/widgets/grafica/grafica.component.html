@@ -1,0 +1,16 @@
+<div [ngClass]="clasesTarjeta">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <div>
+      <small class="text-uppercase text-muted">{{ subtitulo }}</small>
+      <h4 class="mb-0">{{ titulo }}</h4>
+    </div>
+  </div>
+
+  <div style="height: 300px;" *ngIf="esNavegador">
+    <canvas baseChart
+  [data]="{ labels: etiquetas, datasets: conjuntosDatos }"
+  [type]="tipo"
+  [options]="opcionesGrafica">
+</canvas>
+  </div>
+</div>
